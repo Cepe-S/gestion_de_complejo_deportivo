@@ -36,6 +36,7 @@ typedef struct {
     int mes;
     int cancha_id;
     int cliente_id;
+    int baja;
 } turno;
 
 // loads an tipo_cancha struct from console and returns it
@@ -187,6 +188,28 @@ void cargar_turnos() {
 
 // da de baja el turno
 
+
+void bajaTurno(char NombreArchivo, int idcliente)
+{
+    FILE*archivoTurno =fopen(NombreArchivo,"rb");
+    turno turn;
+    int flag=0;
+    
+    if(archivoTurno!=NULL)
+    {
+        while(fread(&turn,sizeof(turno),1,archivoTurno)>0 && flag==0)
+        {
+            if(idcliente ==turn.cliente_id)
+            {
+                mostrar_clientes();
+                turn.baja=0;
+                flag=1;
+            }
+        }
+        fclose(archivoTurno);
+    }
+}
+
 // muestra los turnos de un dia especifico enviado por parametro
 
 // validar dias, meses y turnos
@@ -213,6 +236,7 @@ void modificarTurno(char NombreArchivo[30], int pos)
     }
 }
 //BUSQUEDA
+                              
 void buscarTurno(char NombreArchivo[30], int pos)
 {
     FILE *archivoTurno = fopen("NombreArchivo","rb");
