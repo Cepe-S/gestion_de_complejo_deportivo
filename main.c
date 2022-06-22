@@ -189,7 +189,7 @@ void cargar_turnos() {
 // da de baja el turno
 
 
-void bajaTurno(char NombreArchivo, int idcliente)
+void bajaTurno(char NombreArchivo,int idcliente)
 {
     FILE*archivoTurno =fopen(NombreArchivo,"rb");
     turno turn;
@@ -220,6 +220,7 @@ void bajaTurno(char NombreArchivo, int idcliente)
 
 
 //MODIFICA TURNO
+
 void modificarTurno(char NombreArchivo[30], int pos)
 {
     FILE *archivoTurn = fopen("NombreArchivo","rb);
@@ -235,6 +236,7 @@ void modificarTurno(char NombreArchivo[30], int pos)
         fclose(archivoTurn);
     }
 }
+                              
 //BUSQUEDA
                               
 void buscarTurno(char NombreArchivo[30], int pos)
