@@ -194,6 +194,41 @@ void cargar_turnos() {
 // hacer el menu
 
 // traba el sistema hasta que se aprete enter
+
+
+//MODIFICA TURNO
+void modificarTurno(char NombreArchivo[30], int pos)
+{
+    FILE *archivoTurn = fopen("NombreArchivo","rb);
+    turno turnocancha;
+
+    if(archivoTurn!=NULL)
+    {
+        fseek(archivoAlu,sizeof(turno)*(pos-1),0);
+        fread(&turnocancha,sizeof(turno),1,archivoAlu);
+
+        mostrar_canchas();
+
+        fclose(archivoTurn);
+    }
+}
+//BUSQUEDA
+void buscarTurno(char NombreArchivo[30], int pos)
+{
+    FILE *archivoTurno = fopen("NombreArchivo","rb");
+
+    turno turn;
+
+    if(archivoTurn!=NULL)
+    {
+        fseek(archivoTurno,sizeof(turno)*(pos-1),0);
+        fread(&alu,sizeof(turno),1,archivoTurno);
+        mostrar_canchas();
+        fclose(archivoTurno);
+    }
+    
+}
+
 void volver() {
     bool run = true;
     printf("--> Volver");
