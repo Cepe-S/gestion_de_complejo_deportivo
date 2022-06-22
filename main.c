@@ -186,6 +186,37 @@ void cargar_turnos() {
 
 // valida que el turno no este ocupado buscando en el archivo turnos.dat
 
+int validarBuscandoEnTurnos(char nombreArchivo[],turno buscado)
+{
+	FILE *archi=fopen("turnos.dat","rb");
+	int esta=0;
+	turno t;
+
+	if(archi!=NULL)
+	{
+		while(fread(&t,sizeof(turno),1,archi)>0 && esta==0)
+		{
+			if(t.id_turno==buscado.id_turno)
+			{
+				if(t.dia==buscado.dia)
+				{
+					if(t.mes==buscado.mes)
+					{
+						if(t.cancha_id==buscado.cancha_id)
+						{
+							if(t.cliente_id==buscado.cliente_id)
+							{
+							esta==1;
+							}
+						}
+					}
+				}
+			}
+		}
+		fclose(archi);
+	}
+	return esta;
+}
 // da de baja el turno
 
 
@@ -213,7 +244,57 @@ void bajaTurno(char NombreArchivo,int idcliente)
 // muestra los turnos de un dia especifico enviado por parametro
 
 // validar dias, meses y turnos
+void mostrarUnDiaXParametro(char nombreArchivo[],int dia)
+{
+	FILE *archi;
+	turno t;
+	archi = fopen(nombreArchivo,"rb");
+	int i=0;
 
+	if(archi!=NULL)
+	{
+		fread(&t,sizeof(turno),1,archi);
+		while(!feof(archi))
+		{
+			if(dia==t.dia)
+			{
+			mostrarTurnos(nombreArchivo);
+			}
+		}
+		fclose(archi);
+	}
+}
+
+void mostrarTurno(turno t)
+{
+    printf("ID TURNO: %d\n", t.id_turno);
+    printf("DIA: %d\n", t.dia);
+    printf("MES: %d\n", t.mes);
+    printf("ID CANCHA: %d\n", t.cancha_id);
+    printf("ID CLIENTE: %d\n", t.cliente_id);
+}
+
+void mostrarTurnos(char nombreArchivo[])
+{
+	FILE *archi;
+	turno t;
+	archi=fopen(nombreArchivo,"rb");
+	int i=0;
+
+	if(archi!=NULL)
+	{
+		while(!feof(archi))
+		{
+		fread(&t,sizeof(turno),1,archi);
+		if(!feof(archi))
+			{
+			printf("\nRegistro numero %d",i++);
+			mostrarTurno(t);
+			}
+		}
+		fclose(archi);
+	}
+}
 // hacer el menu
 
 // traba el sistema hasta que se aprete enter
