@@ -101,6 +101,7 @@ cancha cargar_cancha() {
 // cargar canchas en un archivo
 
 // carga clientes solo cuando no estan en el archivo
+
 cliente crear_cliente() {
     cliente c;
     printf("Ingrese el dni del cliente: ");
@@ -122,6 +123,7 @@ void print_cliente(cliente c) {
 }
 
 // carga un cliente pasado por parametro al archivo
+
 void cargar_cliente() {
     int i;
     bool run = true;
@@ -147,6 +149,7 @@ void cargar_cliente() {
 }
 
 // muestra los clientes en formato de tabla
+
 void mostrar_clientes() {
     FILE *archivo;
     archivo = fopen("clientes.dat", "rb");
@@ -161,7 +164,9 @@ void mostrar_clientes() {
     }
     fclose(archivo);
 }
+
 // carga turnos solo cuando el horario no esta ocupado
+
 void cargar_turnos() {
     FILE *archivo;
     archivo = fopen("turnos.dat", "ab");
@@ -194,21 +199,21 @@ int validarBuscandoEnTurnos(char nombreArchivo[],turno buscado)
 
 	if(archi!=NULL)
 	{
-		while(fread(&t,sizeof(turno),1,archi)>0 && esta==0)
+            while(fread(&t,sizeof(turno),1,archi)>0 && esta==0)
+	    {
+	       if(t.id_turno==buscado.id_turno)
 		{
-			if(t.id_turno==buscado.id_turno)
-			{
-				if(t.dia==buscado.dia)
-				{
-					if(t.mes==buscado.mes)
-					{
-						if(t.cancha_id==buscado.cancha_id)
-						{
-							if(t.cliente_id==buscado.cliente_id)
-							{
-							esta==1;
-							}
-						}
+		  if(t.dia==buscado.dia)
+		{
+		   if(t.mes==buscado.mes)
+		     {
+			if(t.cancha_id==buscado.cancha_id)
+			 {
+			   if(t.cliente_id==buscado.cliente_id)
+			   {
+				esta==1;
+					}
+				}
 					}
 				}
 			}
@@ -243,7 +248,17 @@ void bajaTurno(char NombreArchivo,int idcliente)
 
 // muestra los turnos de un dia especifico enviado por parametro
 
+void mostrarTurno(turno t)
+{
+    printf("ID TURNO: %d\n", t.id_turno);
+    printf("DIA: %d\n", t.dia);
+    printf("MES: %d\n", t.mes);
+    printf("ID CANCHA: %d\n", t.cancha_id);
+    printf("ID CLIENTE: %d\n", t.cliente_id);
+}
+
 // validar dias, meses y turnos
+
 void mostrarUnDiaXParametro(char nombreArchivo[],int dia)
 {
 	FILE *archi;
@@ -265,14 +280,7 @@ void mostrarUnDiaXParametro(char nombreArchivo[],int dia)
 	}
 }
 
-void mostrarTurno(turno t)
-{
-    printf("ID TURNO: %d\n", t.id_turno);
-    printf("DIA: %d\n", t.dia);
-    printf("MES: %d\n", t.mes);
-    printf("ID CANCHA: %d\n", t.cancha_id);
-    printf("ID CLIENTE: %d\n", t.cliente_id);
-}
+
 
 void mostrarTurnos(char nombreArchivo[])
 {
@@ -300,7 +308,7 @@ void mostrarTurnos(char nombreArchivo[])
 // traba el sistema hasta que se aprete enter
 
 
-//MODIFICA TURNO
+//Modifica turno
 
 void modificarTurno(char NombreArchivo[30], int pos)
 {
@@ -318,7 +326,7 @@ void modificarTurno(char NombreArchivo[30], int pos)
     }
 }
                               
-//BUSQUEDA
+//Busqueda
                               
 void buscarTurno(char NombreArchivo[30], int pos)
 {
