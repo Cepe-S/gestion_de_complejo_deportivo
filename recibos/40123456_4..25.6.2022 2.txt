@@ -1,0 +1,11 @@
+----Recibo de turno----
+
+Fecha: 25/6/2022
+Turno: 10:00 a 12:00
+Cancha: Futbol id 2
+------------------------
+Cliente: Martin Fernandez
+DNI: 40123456
+Telefono: 2234320912
+------------------------
+Precio: $5000
